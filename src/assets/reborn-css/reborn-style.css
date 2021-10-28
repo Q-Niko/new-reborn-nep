@@ -1,0 +1,12 @@
+body { background-color: rgb(53, 95, 161);}
+#section-dx { background-color: rgb(186, 204, 235); }
+#aside-sx { background-color: rgb(110, 127, 156); }
+#list-comments { margin-top:30px;}
+
+
+/* colore Voto Badge */
+.btn .badge { background-color: #730093; }
+.btn-role { background-color: #0f0f0f; border-color:#0f0f0f; }
+
+/* testi prodotto */
+.text-description {font-size: 0.8rem; text-align: justify;}
