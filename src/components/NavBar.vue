@@ -1,106 +1,74 @@
 <template>
-  <div id="reborn-nav">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <router-link class="navbar-brand" to="/">Logo</router-link>
-        <!--<a class="navbar-brand" href="#">Navbar scroll</a>-->
+  <div class="container-fluid p-0" id="reborn-nav">
+    <!--NAVBAR REBORN -->
+
+    <div class="text-center"></div>
+    <nav class="navbar navbar-expand-lg navbar-color bg-color">
+      <div class="container-fluid navigazione">
         <button
-          class="navbar-toggler"
-          type="button"
+          class="navbar-toggler navbar-toggler-right navmobile navbar-text button "
+          
+          style="color: white"
           data-bs-toggle="collapse"
-          data-bs-target="#navbarScroll"
-          aria-controls="navbarScroll"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <p class="menu">Menù</p>
         </button>
-        <div class="collapse navbar-collapse" id="navbarScroll">
-          <ul
-            class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
-            style="--bs-scroll-height: 100px"
-          >
-            <li class="nav-item">
-              <router-link class="nav-link active" to="/about"
-                >Il Team</router-link
-              >
 
-              <!--<a class="nav-link active" aria-current="page" href="#">Home</a>-->
-            </li>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <div class="col-8">
+          <ul class="navbar-nav">
+             <li class="nav-item">
+               <router-link active style="color: #daa621; font-weight: bold" class="nav-link active" to="/shop-products">
+                <img style="width: 150px;" src="img_product\logo_reborn.jpeg"  alt="Reborn_Home"></router-link>
+                 
+                <li class="nav-item">
+               <router-link active style="color: #daa621; font-weight: bold" class="nav-link active" to="/shop-products"
+                >Market Place</router-link>
 
-            <li class="nav-item">
-              <router-link class="nav-link" to="/shop-products"
-                >Vedi Prodotti</router-link
-              >
-            </li>
 
-            <li class="nav-item">
-              <router-link class="nav-link" to="/add-product"
-                >Carica Prodotto</router-link
-              >
-            </li>
+               <li class="nav-item">
+               <router-link active style="color: #daa621; font-weight: bold" class="nav-link active" to="/about"
+                >Reborn Team</router-link>
 
-            <li class="nav-item">
-              <router-link class="nav-link" to="/cart"
-                ><button type="button" class="btn btn-primary">
-                  Carrello: {{ elementCart.length }}
-                </button></router-link
-              >
-            </li>
-          </ul>
-          <form class="d-flex">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button> 
+              </li>
+              
 
-            <select
+
+          </ul></div>
+          <div class="col-2"> <li class="nav-item" style=" color:#daa621;" >Siete loggati con: {{nowUser}}</li></div>
+          <div class="col-2">
+              <li class="nav-item" id="log-select">
+              <select
               
               class="form-select"
               aria-label="Default select example"
-              v-on:change="changeLogged"
+              v-on:change="changeLogged($event)"
             >
               <option selected>Seleziona l'utenza da loggare</option>
-              <option v-for="user in selectLogged " v-bind:key="user.idTeam"  value="">{{user.name}}</option>
-            </select>
-          </form>
+              <option v-for="user in selectLogged " v-bind:key="user.idTeam"  :value="user.name">{{user.name}}</option>
+            </select> </li></div>
         </div>
       </div>
     </nav>
+    
 
-    <!-- TOAST CARRELLO -->
+    <!-- FINE NAVBAR -->
 
-    <!--<button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>-->
-    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-      <div
-        id="liveToast"
-        class="toast"
-        role="alert"
-        aria-live="assertive"
-        aria-atomic="true"
-      >
-        <div class="toast-header">
-          <img src="pippo" class="rounded me-2" alt="pippo" />
-          <strong class="me-auto">Bootstrap</strong>
-          <small>11 mins ago</small>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="toast"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="toast-body">
-          Hello, world! This is a toast message.
-        </div>
+    <!-- TASTI FUNZIONE AVANZATI -->
+    
+    <div id="underrow" class="d-grid gap-2 d-md-flex justify-content-md-end pt-3 pb-3">
+      <router-link class="nav-link" to="/add-product"><button class="btn btn-color me-md-2" type="button">+ Vendi Prodotto</button></router-link>
+        <router-link class="nav-link" to="/cart"><button class="btn btn-color me-md-2" type="button">Carrello {{ elementCart.length }} </button></router-link>
       </div>
-    </div>
-    <!-- FINE TOAST CARRELLO -->
+      <div class="row p-3"><div class="col-12"><h4 style="cololor:#1d2142;">Ciao {{nowUser}}, felici di rivederti.... </h4></div></div>
+
+      
+
+    <!-- FINE TASTI -->
   </div>
 </template>
 
@@ -109,28 +77,48 @@ export default {
   name: "NavBar",
   /* faccio uscire la proprietà "productReborn" | Sarà bindata attraverso la proprietà "computed" -> "productsIn" in "Home.vue" 
   che richiama i dati effettivi del modello "products". */
-  props: {
+  props: [
     /* proprietà */
-  },
+  ],
 
-  data: function() {
-    return {};
+  data: function () {
+    return {
+      nowUser: "Ospite Reborn",
+    };
   },
-  methods: {},
+  methods: {
+    /*commit che gestisce la mutation di visualizzazione di utente loggato*/
+
+    changeUserShow: function () {
+      this.$store.commit("changeOnline", this.nowUser);
+    },
+
+    /* cambia il balore di nowUser in base al valore selezionato*/
+
+    changeLogged: function (event) {
+      return (this.nowUser = event.target.value);
+    },
+  },
 
   computed: {
     /* Prendo l'array cart */
-    elementCart: function() {
+    elementCart: function () {
       return this.$store.getters.getCart;
     },
 
-    selectLogged: function() {
-      return this.$store.getters.getLogged;
+    /* fa vedere la lista di utenti registrati e loggabili */
+
+    selectLogged: function () {
+      return this.$store.getters.getLoggedUser;
     },
 
-    changeLogged: function() { return "ciao" },
+    /* prende il valore OnUser */
 
+    onlineUser: function () {
+      return this.$store.getters.getOnline;
+    },
 
+    /*fine*/
   },
 };
 </script>

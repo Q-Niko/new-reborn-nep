@@ -1,11 +1,6 @@
 <template>
-  <div class="home">
-  
-       
-    
-    
-    
-  </div>
+  <div> èwoejrioefh </div>
+
 </template>
 
 <script>

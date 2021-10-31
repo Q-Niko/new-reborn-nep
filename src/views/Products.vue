@@ -1,35 +1,34 @@
 <template>
-    <div id="shop">
 
-
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-      <div id="section-top" class="col-xs-12 col-sm-6 col-md-8">
-          
-          <CardProduct v-for="product in productsIn" :key="product.serial" :productReborn="product"></CardProduct></div>
-      <div id="aside-product" class="col-xs-6 col-md-4"></div>
-   
+    <div class="col-sm-8">
+      <h2>I nostri articoli ({{this.productsIn.length }})</h2>
+      <CardProduct v-for="product in productsIn" :key="product.serial" :productReborn="product"></CardProduct>
+    </div>
+    <div class="col-sm-4">
+     <h2>Gli articoli scelti da noi.</h2>
+     <CardProductSpecial v-for="product in productsIn" :key="product.serial" :productReborn="product"></CardProductSpecial>
+    </div>
     
-    
-    
-
   </div>
-     
-  </div>
-  </div>
+  <Footer/>
+</div>
 </template>
 
 <script>
-
 import CardProduct from "@/components/CardProduct.vue";
+import CardProductSpecial from "@/components/CardProductSpecial.vue";
+import Footer from '@/components/Footer.vue';
 
 export default {
   name: "Shop",
   components: {
     CardProduct,
+    CardProductSpecial,
+    Footer
   },
   computed: {
-    
     productsIn: function () {
       return this.$store.state.products;
     },
